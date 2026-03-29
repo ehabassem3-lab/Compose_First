@@ -2,4 +2,8 @@
 <resources>
 
     <style name="Theme.Compose_First" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="nameTextSttyle">
+
+
+    </style>
 </resources>
