@@ -46,7 +46,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.compose_first.routes.HomeRoute
 import com.example.compose_first.routes.SplashRoute
-import com.example.compose_first.screens.HomeScreen
+import com.example.compose_first.screens.News
 import com.example.compose_first.screens.SplashScreen
 import com.example.compose_first.ui.theme.Compose_FirstTheme
 
@@ -82,7 +82,7 @@ fun App(
         startDestination = HomeRoute
     ) {
         composable<HomeRoute> {
-            HomeScreen(navController)
+            News(navController)
         }
         composable<SplashRoute> {
             SplashScreen(navController)
