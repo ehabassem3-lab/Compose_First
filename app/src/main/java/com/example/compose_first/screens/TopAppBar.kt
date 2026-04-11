@@ -37,64 +37,42 @@ import java.lang.reflect.Type
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar( title  : String) {
-    val colorScheme = MaterialTheme.colorScheme
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
-    ModalNavigationDrawer(
-        drawerState = drawerState,
-        drawerContent = {
-            DrawerContent()
-        }
-    ) {
-        CenterAlignedTopAppBar(
-            modifier = Modifier.background(colorScheme.background),
-            navigationIcon = {
-
-
-                Image(
-                    modifier = Modifier.padding(start = 20.dp).size(40.dp).clickable(onClick = {
-                        scope.launch {
-                            drawerState.open()
-                        }
-
-                    }),
-                    painter = painterResource(R.drawable.ic_hamburger),
-                    contentDescription = "",
-                    colorFilter = ColorFilter.tint(colorScheme.onBackground),
-
-
-                    )
-            },
-            actions = {
-                Image(
-                    modifier = Modifier.padding(end = 20.dp).size(30.dp),
-                    painter = painterResource(R.drawable.ic_search),
-                    contentDescription = "",
-                    colorFilter = ColorFilter.tint(colorScheme.onBackground),
-
-                    )
-            },
-            colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                containerColor = colorScheme.background,
-                titleContentColor = colorScheme.onBackground,
-                actionIconContentColor = colorScheme.onBackground
-
-            ),
-            title = {
-                Text(
-                    text = title,
-                    style = DarkThemeTypography.bodyLarge,
-                    color =  colorScheme.onBackground
-
-
-                )
-
-            }
-
+fun TopAppBar(
+    title: String,
+    onMenuClick: () -> Unit
+) {
+    CenterAlignedTopAppBar(
+        title = {
+            Text(
+                text = title,
+                style = DarkThemeTypography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        },
+        navigationIcon = {
+            Image(
+                modifier = Modifier
+                    .padding(start = 20.dp)
+                    .size(40.dp)
+                    .clickable(onClick = onMenuClick),
+                painter = painterResource(R.drawable.ic_hamburger),
+                contentDescription = "Menu",
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground)
+            )
+        },
+        actions = {
+            Image(
+                modifier = Modifier
+                    .padding(end = 20.dp)
+                    .size(30.dp),
+                painter = painterResource(R.drawable.ic_search),
+                contentDescription = "Search",
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground)
+            )
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.background
         )
-
-    }
+    )
 }
-
 
