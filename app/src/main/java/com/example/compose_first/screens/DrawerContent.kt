@@ -28,7 +28,7 @@ import com.example.compose_first.R
 import com.example.compose_first.ui.theme.DarkThemeTypography
 
 @Composable
-fun DrawerContent()
+fun DrawerContent(OnHomeClick:()-> Unit)
 
 {
     val colorScheme =  MaterialTheme.colorScheme
@@ -56,6 +56,7 @@ fun DrawerContent()
             Icon = painterResource(R.drawable.ic_home),
             title = "Go To Home",
             onClick = {
+                OnHomeClick()
 
             }
 

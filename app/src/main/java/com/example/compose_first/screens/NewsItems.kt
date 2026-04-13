@@ -6,6 +6,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.content.MediaType.Companion.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -148,10 +149,14 @@ fun NewsSingleITem(newsItem: NewsItem){
         )
 
         Row(
+            horizontalArrangement = Arrangement.SpaceAround,
+
+
+            modifier = Modifier.padding(start = 10.dp, top = 20.dp) ,
         ) {
-            Text(newsItem.NewsAuthor , modifier = Modifier ,  style = DarkThemeTypography.labelSmall)
-            Spacer(modifier = Modifier.size(100.dp))
-            Text(newsItem.NewsPublishTime  ,  style = DarkThemeTypography.labelSmall)
+            Text(newsItem.NewsAuthor  ,  style = DarkThemeTypography.labelSmall)
+            Spacer(modifier = Modifier.size(190.dp))
+            Text(newsItem.NewsPublishTime  ,  style = DarkThemeTypography.labelSmall )
 
         }
 

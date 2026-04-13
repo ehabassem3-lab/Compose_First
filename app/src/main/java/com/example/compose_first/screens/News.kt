@@ -22,12 +22,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.compose_first.models.CategoriesModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun News(navController: NavController) {
-    var isEven by remember { mutableStateOf(false) }
+    var selctedCategory by remember { mutableStateOf<CategoriesModel?>(null) }
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -35,7 +36,14 @@ fun News(navController: NavController) {
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            DrawerContent()
+            DrawerContent(){
+                selctedCategory = null
+                scope.launch {
+                    drawerState.close()
+                }
+
+
+            }
         }
     ) {
         Scaffold(
@@ -43,7 +51,7 @@ fun News(navController: NavController) {
             topBar = {
                 TopAppBar(
 
-                    title =  if (isEven)"General" else "Home",
+                    title =  if (selctedCategory == null)"Home" else "General",
                     onMenuClick = {
                         scope.launch { drawerState.open() }
                     }
@@ -57,13 +65,16 @@ fun News(navController: NavController) {
                     .fillMaxSize()
                     .padding(innerPadding)
             ) {
-                if (isEven){
-                    NewsTabs()
+                if (selctedCategory != null){
+                    NewsTabs(selctedCategory!!)
                     Spacer(modifier = Modifier.size(20.dp))
                     NewsItems()
                 }
                 else{
-                    CategoriesTab()
+                    CategoriesTab(){
+                        selctedCategory = it
+
+                    }
                 }
 
 

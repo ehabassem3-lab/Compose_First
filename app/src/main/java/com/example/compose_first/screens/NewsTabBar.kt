@@ -24,10 +24,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.compose_first.models.CategoriesModel
 import com.example.compose_first.ui.theme.DarkThemeTypography
 
 @Composable
-fun NewsTabs() {
+fun NewsTabs(categories: CategoriesModel) {
     val colorScheme = MaterialTheme.colorScheme
     val tabs = listOf("tab1", "tab2", "tab3", "tab4", "tab5")
 

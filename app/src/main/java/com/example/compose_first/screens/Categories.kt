@@ -3,6 +3,7 @@ package com.example.compose_first.screens
 import androidx.compose.foundation.Image
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,15 +44,18 @@ import com.example.compose_first.R
 import com.example.compose_first.models.CategoriesModel
 import com.example.compose_first.models.CategoriseList
 import com.example.compose_first.ui.theme.Black
+import com.example.compose_first.ui.theme.DarkThemeTypography
 import com.example.compose_first.ui.theme.Gray
 import com.example.compose_first.ui.theme.White
 
 @Composable
-fun CategoriesTab(){
+fun CategoriesTab(onCategoryClick:( category : CategoriesModel)-> Unit){
     val colorScheme = MaterialTheme.colorScheme
     LazyColumn (modifier = Modifier.fillMaxSize().background(colorScheme.background)){
         itemsIndexed(CategoriseList){ index , category ->
-            CategoriesItem(category , index)
+            CategoriesItem(category , index ){
+                onCategoryClick(category)
+            }
 
         }
 
@@ -61,23 +65,24 @@ fun CategoriesTab(){
 
 }
 @Composable
-fun CategoriesItem( categoriesModel: CategoriesModel , index : Int ){
-    val colorScheme = MaterialTheme.colorScheme
-     var isEven = index % 2 == 0
+fun CategoriesItem( categoriesModel: CategoriesModel , index : Int , onClick:() -> Unit ){
+    val colorScheme = MaterialTheme.colorScheme;
+     var isEven = index % 2 == 0 ;
+
          Box(modifier =
              Modifier
                  .  fillMaxHeight(.2f)
-                 .padding(vertical = 10.dp , horizontal = 10.dp)
+                 .padding(vertical = 5.dp , horizontal = 5.dp)
                  .fillMaxWidth()
                  .height(200.dp)
-                 .padding(vertical = 10.dp)
+                 .clickable{onClick()}
                  .clip(RoundedCornerShape(25.dp))
                  .background(colorScheme.onBackground)
 
 
          ){
 
-                 ItemDirection(isEven =  isEven , Image = categoriesModel.CategorieImage , categoriesModel.CategorieTitle)
+        ItemDirection(isEven =  isEven , Image = categoriesModel.CategorieImage , categoriesModel.CategorieTitle)
 
 
 
@@ -91,26 +96,39 @@ fun ItemDirection( isEven : Boolean  , Image : Int ,  Text : String){
     if (isEven){
         Image(painter =  painterResource(Image) , contentDescription = ""  )
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(end = 20.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.End
         ) {
-            Text(text =  Text , color =  colorScheme.background)
+            Text(text =  Text , color =  colorScheme.background , style = DarkThemeTypography.headlineLarge)
             Spacer(modifier = Modifier.size(40.dp))
-            Row  (
-                modifier = Modifier.background(Gray).clip(CircleShape)
+            Card  (
+                modifier = Modifier.height(50.dp).width(150.dp).clip(shape = RoundedCornerShape(20.dp)) ,
+                colors = CardDefaults.cardColors(
+                    containerColor = Gray
+                )
+
+
 
             ) {
-                Text(text =  "View All" , color =  colorScheme.onBackground)
+                Row() {
+                    Text(text =  "View All" ,
+                        color =  colorScheme.onBackground ,
+                        modifier = Modifier.padding(horizontal = 5.dp).align (Alignment.CenterVertically),
+                    )
 
-                Icon(
-                    imageVector =  Icons.AutoMirrored.Default.KeyboardArrowRight,
-                    contentDescription = "" ,
-                    modifier = Modifier.clip(CircleShape)
-                        .size(40.dp)
-                        . background(colorScheme.background) ,
-                    tint = colorScheme.onBackground
-                )
+                    Icon(
+                        imageVector =  Icons.AutoMirrored.Default.KeyboardArrowRight,
+                        contentDescription = "" ,
+                        modifier = Modifier.clip(CircleShape)
+                            .fillMaxHeight()
+                            .width(50.dp)
+                            . background(colorScheme.background)
+                            .align (Alignment.CenterVertically),
+                        tint = colorScheme.onBackground
+                    )
+                }
+
 
 
             }
@@ -119,28 +137,42 @@ fun ItemDirection( isEven : Boolean  , Image : Int ,  Text : String){
     }
     else{
 
-      Image(painter = painterResource(Image) , contentDescription = "" , modifier = Modifier.offset(x = 190.dp))
+      Image(painter = painterResource(Image) , contentDescription = "" , modifier = Modifier.offset(x = 200.dp))
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(start = 20.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
         ) {
-            Text(text =  Text , color =  colorScheme.background)
-            Spacer(modifier = Modifier.size(40.dp))
-            Row  (
-                modifier = Modifier.background(Gray).clip(CircleShape)
+            Text(text =  Text , color =  colorScheme.background , style = DarkThemeTypography.headlineLarge )
+            Spacer(modifier = Modifier.size(45.dp))
+            Card  (
+                modifier = Modifier.height(50.dp).width(150.dp).clip(shape = RoundedCornerShape(20.dp)) ,
+                colors = CardDefaults.cardColors(
+                    containerColor = Gray
+                )
+
+
 
             ) {
-                Text(text =  "View All" , color =  colorScheme.onBackground)
+                Row() {
+                    Text(text =  "View All" ,
+                        color =  colorScheme.onBackground ,
+                        modifier = Modifier.padding(horizontal = 5.dp).align (Alignment.CenterVertically),
+                        style = DarkThemeTypography.bodyLarge
+                    )
 
-                Icon(
-                    imageVector =  Icons.AutoMirrored.Default.KeyboardArrowRight,
-                    contentDescription = "" ,
-                    modifier = Modifier.clip(CircleShape)
-                        .size(40.dp)
-                        . background(colorScheme.background) ,
-                    tint = colorScheme.onBackground
-                )
+                    Icon(
+                        imageVector =  Icons.AutoMirrored.Default.KeyboardArrowRight,
+                        contentDescription = "" ,
+                        modifier = Modifier.clip(CircleShape)
+                            .fillMaxHeight()
+                            .width(50.dp)
+                            . background(colorScheme.background)
+                            .align (Alignment.CenterVertically),
+                        tint = colorScheme.onBackground
+                    )
+                }
+
 
 
             }
