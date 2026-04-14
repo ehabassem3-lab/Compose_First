@@ -67,14 +67,13 @@ fun News(navController: NavController) {
             ) {
                 if (selctedCategory != null){
                     NewsTabs(selctedCategory!!)
-                    Spacer(modifier = Modifier.size(20.dp))
-                    NewsItems()
                 }
                 else{
-                    CategoriesTab(){
-                        selctedCategory = it
 
-                    }
+                   CategoriesTab(){
+                       selctedCategory = it
+
+                 }
                 }
 
 

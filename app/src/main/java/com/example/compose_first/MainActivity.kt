@@ -48,6 +48,7 @@ import com.example.compose_first.routes.GeneralRoute
 import com.example.compose_first.routes.SplashRoute
 import com.example.compose_first.screens.News
 import com.example.compose_first.screens.SplashScreen
+import com.example.compose_first.screens.onLoading
 import com.example.compose_first.ui.theme.Compose_FirstTheme
 
 
@@ -100,5 +101,6 @@ fun App(
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
+
 
 }
