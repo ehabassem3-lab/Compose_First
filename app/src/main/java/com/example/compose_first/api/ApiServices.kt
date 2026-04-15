@@ -11,17 +11,17 @@ interface ApiServices {
 
 
     @GET("v2/top-headlines/sources")
-    fun getSources(
+   suspend fun getSources(
         @Query("apiKey") apiKey : String = API_KEY,
         @Query("category") category: String
-    ) : Call<SourcesResponse>
+    ) : SourcesResponse
 
      @GET("v2/everything")
-    fun getArticles
+     suspend fun getArticles
                  (
          @Query("apiKey") apiKey : String = API_KEY,
        @Query("sources")  source : String
-    ) : Call<ArticelsResponse>
+    ) : ArticelsResponse
 
 
 }
