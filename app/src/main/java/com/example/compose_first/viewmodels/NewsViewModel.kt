@@ -16,13 +16,16 @@ import com.example.compose_first.models.ArticelsResponse
 import com.example.compose_first.models.ArticlesItem
 import com.example.compose_first.models.SourcesItem
 import com.example.compose_first.models.SourcesResponse
+import com.example.compose_first.reposotories.NewsRepositories
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.log
 
 
 class  NewsViewModel : ViewModel(){
+    var newsRepositories  = NewsRepositories()
     var tabs  : MutableLiveData<List<SourcesItem>?> = MutableLiveData(null)
 
     var isLoadingSources  : MutableLiveData<Boolean> = MutableLiveData(false)
@@ -36,8 +39,9 @@ class  NewsViewModel : ViewModel(){
         isLoadingSources.value = true
         viewModelScope.launch {
             try {
-                var response  =     ApiManager.apiService.getSources(category =  categories)
-                tabs.value = response.sources
+                tabs.value  = newsRepositories.getSources(category =  categories)
+                Log.e("Respone " , "Response${tabs.value }")
+
                 isLoadingSources.value = false
 
             }

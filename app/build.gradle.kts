@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     kotlin("plugin.serialization") version "1.9.0"
+    alias(libs.plugins.ksp)
+
 }
 
 android {
@@ -43,6 +45,12 @@ android {
 }
 
 dependencies {
+    val room_version = "2.8.4"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:2.5.0")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:${room_version}")
     implementation(libs.androidx.compose.runtime.livedata)
     val lifecycle_version = "2.10.0"
     val arch_version = "2.2.0"

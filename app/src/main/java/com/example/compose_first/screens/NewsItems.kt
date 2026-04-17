@@ -96,14 +96,22 @@ fun NewsItems(sources : String?){
                 }
             }
         }
-
-        if (!Articles.value.isNullOrEmpty()){
-            items (Articles.value!!.size){ Article ->
-                NewsSingleITem(Articles.value!![Article])
-                Spacer(modifier = Modifier.size(10.dp))
+        if (Articles.value?.isEmpty() == true ){
+            item {
+                emptyArticles("No Articles to Show")
 
             }
+
         }
+
+        if ( !Articles.value.isNullOrEmpty()){
+                    items (Articles.value!!.size){ Article ->
+                        NewsSingleITem(Articles.value!![Article])
+                        Spacer(modifier = Modifier.size(10.dp))
+
+            }
+            }
+
 
 
     }

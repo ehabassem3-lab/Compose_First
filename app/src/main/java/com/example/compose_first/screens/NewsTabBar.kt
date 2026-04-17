@@ -86,7 +86,13 @@ fun NewsTabs(categories: CategoriesModel) {
 
 
                    }
+                   if (tabs.value?.isEmpty() == true){
+                       emptyArticles("SomeThing Went Wrong")
+
+                   }
                    if (!tabs.value.isNullOrEmpty()) {
+
+
                        ScrollableTabRow(
                            selectedTabIndex = selectedTabIndex,
                            indicator = { tabPositons ->
